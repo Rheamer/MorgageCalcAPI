@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      name: app
+      labels:
+        app: app
+    spec:
+      containers:
+      - image: jenkins/jenkins:lts
+        name: app
+        ports:
+        - containerPort: 8080
+        - containerPort: 50000
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/jenkins_home
+          name: jenkins-claim0
+      restartPolicy: Always
+      volumes:
+      - name: jenkins-claim0
+        persistentVolumeClaim:
+          claimName: jenkins-claim0
+status: {}

@@ -6,7 +6,6 @@ authors = ["Egor Ponyavin <ep@idaproject.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-psycopg2 = "~2.8.5"
 # Django
 Django = "==3.1.6"
 # Django Rest Framework
@@ -15,8 +14,6 @@ coreapi = "2.3.3 "
 drf-spectacular = '0.13.2'
 # third
 requests = "~2.23.0"
-Pillow-SIMD = "~7.0.0.post3"
-cryptography = "2.1.4"
 django-filter = "21.1"
 
 # Testing

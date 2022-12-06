@@ -1,0 +1,48 @@
+
+
+variables:
+  # DJANGO_CONFIG: "test"
+
+default:
+  image: ubuntu:20.04
+  tags:
+    - tpos
+  #
+  # This folder is cached between builds
+  # http://docs.gitlab.com/ee/ci/yaml/README.html#cache
+  cache:
+    paths:
+      - ~/.cache/pip/
+  before_script:
+    - apt -y update
+    - apt -y install apt-utils
+    - export DEBIAN_FRONTEND=noninteractive
+    - apt -y install tzdata
+    - ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+    - dpkg-reconfigure --frontend noninteractive tzdata
+    - apt -y install net-tools python3.9 python3-pip mysql-client libmysqlclient-dev
+    - apt -y install python3-dev
+    - apt -y upgrade
+    - apt -y install curl
+    - pip install --upgrade pip setuptools wheel
+    - python3 -m pip install --upgrade pip --user
+    - apt -y install libjpeg-dev zlib1g-dev
+    - curl -sSL https://install.python-poetry.org | python3 -
+    - python3 -m pip install --upgrade pip
+    - python3 -m pip install --upgrade Pillow
+    - /root/.local/bin/poetry install
+
+
+migrations:
+  stage: build
+  script:
+    - /root/.local/bin/poetry run python3 manage.py makemigrations
+    # - python3 manage.py makemigrations myapp
+    - /root/.local/bin/poetry run python3 manage.py migrate
+    - /root/.local/bin/poetry run python3 manage.py check
+
+
+django-tests:
+  stage: test
+  script:
+    - poetry run python3 manage.py test
