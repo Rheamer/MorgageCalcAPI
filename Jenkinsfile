@@ -29,7 +29,7 @@ pipeline {
             }
         }
 
-        stage("Test"){
+        stage("Build"){
             steps{
                 sh "$HOME/.poetry/bin/poetry build"
             }
