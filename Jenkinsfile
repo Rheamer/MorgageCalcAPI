@@ -34,5 +34,5 @@ pipeline {
                 sh "$HOME/.poetry/bin/poetry build"
             }
         }
-
-
+    }
+}
