@@ -1,7 +1,12 @@
 PROJECT_VERSION = "1.0.0"
 
 pipeline {
-    agent any
+    agent {
+      docker {
+        image 'python:3'
+        label 'my-build-agent'
+      }
+    }
     triggers {
         githubPush()
     }
@@ -10,7 +15,6 @@ pipeline {
             steps{
                 sh "curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python"
                 sh "$HOME/.poetry/bin/poetry install --no-root"
-                sh 'apt-get install python3'
             }
         }
 
