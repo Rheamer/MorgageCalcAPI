@@ -17,21 +17,23 @@ pipeline {
 
         stage('Check') {
             steps{
-                sh "$HOME/.poetry/bin/poetry python3 manage.py makemigrations"
-                sh "$HOME/.poetry/bin/poetry python3 manage.py migrate"
-                sh "$HOME/.poetry/bin/poetry python3 manage.py check"
+                sh "$HOME/.poetry/bin/poetry python3 project/manage.py makemigrations"
+                sh "$HOME/.poetry/bin/poetry python3 project/manage.py migrate"
+                sh "$HOME/.poetry/bin/poetry python3 project/manage.py check"
             }
         }
 
         stage("Test"){
             steps{
-                sh "$HOME/.poetry/bin/poetry python3 manage.py test"
+                sh "$HOME/.poetry/bin/poetry python3 project/manage.py test"
             }
         }
 
-        stage("Test"){
+        stage("Build container and deploy with kubectl"){
             steps{
-                sh "$HOME/.poetry/bin/poetry build"
+                docker.build("rheamer/calculator")
+                sh 'curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"'
+                sh 'kubectl apply -f deploy/'
             }
         }
 

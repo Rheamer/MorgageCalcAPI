@@ -19,7 +19,7 @@ spec:
         app: app
     spec:
       containers:
-      - image: rheamer/morgage:lts
+      - image: rheamer/calculator
         name: app
         ports:
         - containerPort: 8000
