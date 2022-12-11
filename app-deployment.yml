@@ -19,18 +19,11 @@ spec:
         app: app
     spec:
       containers:
-      - image: jenkins/jenkins:lts
+      - image: rheamer/morgage:lts
         name: app
         ports:
-        - containerPort: 8080
-        - containerPort: 50000
+        - containerPort: 8000
         resources: {}
-        volumeMounts:
-        - mountPath: /var/jenkins_home
-          name: jenkins-claim0
       restartPolicy: Always
-      volumes:
-      - name: jenkins-claim0
-        persistentVolumeClaim:
-          claimName: jenkins-claim0
+
 status: {}

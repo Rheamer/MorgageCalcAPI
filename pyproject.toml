@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "Test task main"
+name = "project"
 version = "0.1.0"
 description = ""
 authors = ["Egor Ponyavin <ep@idaproject.com>"]
