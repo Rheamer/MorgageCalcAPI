@@ -8,7 +8,6 @@ pipeline {
     stages {
         stage('Poetry Configuration') {
             steps{
-                sh 'sudo apt-get update && sudo apt-get install -y curl'
                 sh "curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python"
                 sh "$HOME/.poetry/bin/poetry install --no-root"
                 sh 'apt-get install python3'
