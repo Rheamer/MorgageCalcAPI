@@ -31,7 +31,7 @@ pipeline {
 
         stage("Build container and deploy with kubectl"){
             steps{
-                docker.build("rheamer/calculator")
+                // docker.build("rheamer/calculator")
                 sh 'curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"'
                 sh 'kubectl apply -f deploy/'
             }
