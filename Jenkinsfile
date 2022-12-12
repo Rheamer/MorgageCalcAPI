@@ -8,17 +8,19 @@ pipeline {
     stages {
         stage('Poetry Configuration') {
             steps{
+                sh "echo hello"
             }
         }
 
         stage('Check') {
             steps{
-
+                sh 'echo hello'
             }
         }
 
         stage("Test"){
             steps{
+                sh 'echo hello'
             }
         }
 
