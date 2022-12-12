@@ -3,11 +3,11 @@ podTemplate(containers: [
     containerTemplate(
         name: 'ubuntu', 
         image: 'ubuntu:20.04'
-    },
-    containerTemplate{
+    ),
+    containerTemplate(
         name: 'kaniko',
         image: 'gcr.io/kaniko-project/executor:debug'
-    }
+    )
   ]) {
 
     node(POD_LABEL) {
